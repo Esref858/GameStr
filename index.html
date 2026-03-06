@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-site-verification" content="08wWrz5NTUPEcXp_LVOClBHp-IfT1HcDeaBG-SshtCY" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gamer Haven</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #070b19;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(211, 0, 197, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 85% 50%, rgba(0, 212, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 50% 100%, rgba(211, 0, 197, 0.05) 0%, transparent 50%);
+            color: #ffffff;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .side-decoration {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 300px;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            opacity: 0.6;
+            z-index: 0;
+        }
+        .side-decoration.left { left: 10px; }
+        .side-decoration.right { right: 10px; }
+        .side-decoration span {
+            display: block;
+            color: #00d4ff;
+            font-size: 1.2rem;
+            letter-spacing: -2px;
+        }
+        .side-dots {
+            width: 20px;
+            height: 60px;
+            background-image: radial-gradient(#00d4ff 20%, transparent 20%);
+            background-size: 8px 8px;
+            opacity: 0.3;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            background: #070b19;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: 1px;
+        }
+        .logo .gamer { color: #00d4ff; }
+        .logo .haven { color: #d300c5; }
+
+        .search-container {
+            position: relative;
+            width: 400px;
+        }
+        .search-bar {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 10px 20px 10px 40px;
+            color: #fff;
+            outline: none;
+            font-size: 14px;
+        }
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 14px;
+        }
+
+        .cart-icon {
+            font-size: 22px;
+            color: #d300c5;
+            position: relative;
+        }
+        .cart-badge {
+            position: absolute;
+            top: -8px;
+            right: -10px;
+            background: #d300c5;
+            color: #fff;
+            font-size: 10px;
+            font-weight: bold;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        nav {
+            background: linear-gradient(90deg, #d300c5 0%, #6700c2 30%, #0d1225 100%);
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            position: relative;
+            z-index: 10;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        nav a i { font-size: 10px; }
+
+        .catalog {
+            padding: 40px 8%;
+            position: relative;
+            z-index: 10;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .game-card {
+            background: #0a0f24;
+            border: 2px solid #d300c5;
+            border-radius: 12px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .game-card:hover {
+            border-color: #00d4ff;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5), inset 0 0 10px rgba(0, 212, 255, 0.2);
+            transform: scale(1.02);
+            z-index: 2;
+        }
+
+        .card-image {
+            width: 100%;
+            aspect-ratio: 3 / 4;
+            border-radius: 8px;
+            object-fit: cover;
+            margin-bottom: 15px;
+            background: #111;
+        }
+
+        .game-title {
+            font-size: 15px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 5px;
+            color: #fff;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game-price {
+            font-size: 18px;
+            font-weight: 800;
+            color: #d300c5;
+            margin-bottom: 15px;
+        }
+        
+        .game-card:hover .game-price { color: #00d4ff; }
+
+        .btn-buy {
+            width: 80%;
+            padding: 12px;
+            background: linear-gradient(90deg, #00d4ff 0%, #d300c5 100%);
+            color: #fff;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+        }
+
+
+        .footer-box {
+            margin: 40px 8% 80px;
+            border: 2px solid #d300c5;
+            border-radius: 12px;
+            padding: 30px;
+            background: rgba(10, 15, 36, 0.8);
+            position: relative;
+            z-index: 10;
+        }
+        .footer-box h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 20px;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        .footer-box p {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+        .social-icons {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+        }
+        .social-icons i {
+            background: #00d4ff;
+            color: #000;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .floating-chat {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d300c5, #6700c2);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 28px;
+            box-shadow: 0 5px 15px rgba(211, 0, 197, 0.5);
+            z-index: 100;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="side-decoration left">
+        <span>&lt;&lt;&lt;</span>
+        <div class="side-dots"></div>
+        <span>&lt;&lt;&lt;</span>
+    </div>
+    <div class="side-decoration right">
+        <span>&gt;&gt;&gt;</span>
+        <div class="side-dots"></div>
+        <span>&gt;&gt;&gt;</span>
+    </div>
+
+    <header>
+        <div class="logo">
+            <div class="gamer">GAMER</div>
+            <div class="haven">HAVEN</div>
+        </div>
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-bar" placeholder="Səhərli...">
+        </div>
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <div class="cart-badge">0</div>
+        </div>
+    </header>
+
+    <nav>
+        <a href="#">BAŞ SƏHİFƏ</a>
+        <a href="#">OYUNLAR <i class="fas fa-chevron-down"></i></a>
+        <a href="#">KATEQORİYALAR <i class="fas fa-chevron-down"></i></a>
+        <a href="#">XƏBƏRLƏR</a>
+        <a href="#">HESABIM</a>
+    </nav>
+
+    <section class="catalog">
+        <div class="games-grid" id="games-container">
+            </div>
+    </section>
+
+    <div class="footer-box">
+        <h3>HAQQIMIZDA</h3>
+        <p>Salam! Mən bu oyunu almaq istəyirəm: [oyun adı] n ecunn <br> Ən yaxşı oyunları bizdən əldə edə bilərsiniz.</p>
+        <div class="social-icons">
+            <i class="fab fa-facebook-f"></i>
+            <i class="fab fa-twitter"></i>
+            <i class="fab fa-instagram"></i>
+            <i class="fab fa-tiktok"></i>
+        </div>
+    </div>
+
+    <div class="floating-chat">
+        <i class="fas fa-comment-dots"></i>
+    </div>
+
+    <script>
+        const whatsappNumber = "994123455";
+
+        const games = [
+
+            { title: "Football Manager 26", price: 10.90, img: "https://cdn.footballmanager.com/site/2025-09/1034x600_FM26%20Pre%20Order_News%20Story_Blog%20Header_2.png" },
+            { title: "FC 25", price: 6.90, img:"https://images.igdb.com/igdb/image/upload/t_cover_big_2x/co8vpc.jpg" },
+            { title: "Red Dead Redemption II", price: 5.90, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYhTdrfXk0LVl96VEdgauqXRMzn6cvUJ6nzA&s" },
+            { title: "Grand Theft Auto V", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/a/a5/Grand_Theft_Auto_V.png" },
+            { title: "Mafia: The Old Country", price: 8.90, img:"https://m.media-amazon.com/images/M/MV5BYzNjOWUxNjAtZTBhMi00ZjM3LTg5YWQtZTk1MzE5YjkzNTE2XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
+            { title: "The Last of Us Part II", price: 6.90, img:"https://image.api.playstation.com/vulcan/ap/rnd/202312/0117/315718bce7eed62e3cf3fb02d61b81ff1782d6b6cf850fa4.png" },
+            { title: "God of War", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/a/a7/God_of_War_4_cover.jpg" },
+            { title: "God of War Ragnarok", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg" },
+            { title: "The Last of Us", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/8/86/The_Last_of_Us_Part_I_cover.jpg" },
+            { title: "Spider-Man 2", price: 5.90, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsAd3erho1hfdd5t8v7LhA9rS-L0bVb1-VbQ&s" },
+            { title: "Assassin's Creed Shadows", price: 6.90, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnj43JxhJ5VytIJpBPKqv4jl7HHwaMYKyYfg&s" },
+            { title: "It Takes Two", price: 6.90, img:"https://upload.wikimedia.org/wikipedia/en/a/aa/It_Takes_Two_cover_art.png" },
+            { title: "Hogwarts Legacy", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/thumb/f/fb/Hogwarts_legacyboxart.png/250px-Hogwarts_legacyboxart.png" },
+            { title: "Ghost of Tsushima", price: 5.90, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJKxpPZOnojerKLQGo-2HiXpnWdVhJN8p6Lw&s" },
+            { title: "Black Myth: Wukong", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/thumb/a/a6/Black_Myth_Wukong_cover_art.jpg/250px-Black_Myth_Wukong_cover_art.jpg" },
+            { title: "Forza Horizon 5", price: 7.90, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2tnojoSWyq9xWZ0P6OqX8h7symLX5gWFzxw&s" },
+            { title: "A Way Out", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/thumb/8/83/A_Way_Out_Logo.jpg/250px-A_Way_Out_Logo.jpg" },
+            { title: "Spider-Man Remastered", price: 4.90, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGgvciWZy3wtMjc5QT5DNf2trXxgJDfvp0dg&s" },
+            { title: "Spider-Man Miles Morales", price: 4.90, img:"https://image.api.playstation.com/vulcan/ap/rnd/202008/1020/PRfYtTZQsuj3ALrBXGL8MjAH.jpg" },
+            { title: "Elden Ring", price: 5.90, img:"https://assets.xboxservices.com/assets/7b/54/7b54f5e4-0857-4ce3-8a18-2b8c431e8a9e.jpg?n=Elden-Ring_GLP-Page-Hero-0_1083x1222_01.jpg" },
+            { title: "Resident Evil 4", price: 5.90 , img:"https://gaming-cdn.com/images/products/6772/orig/resident-evil-4-pc-game-steam-europe-cover.jpg?v=1684153325"},
+            { title: "Resident Evil Village", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/2/2c/Resident_Evil_Village.png" },
+            { title: "Resident Evil 3", price: 5.90, img:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRBe-8QfYB6kKudhVxg7JhT2MF_OGi_FxB5YQ&s" },
+            { title: "Resident Evil Biohazard", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/f/fd/Resident_Evil_7_cover_art.jpg" },
+            { title: "Far Cry 6", price: 5.90 , img:"https://upload.wikimedia.org/wikipedia/az/8/8e/Far_Cry_6.jpg"},
+            { title: "Red Dead Redemption 1", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/ru/a/a7/Red_Dead_Redemption.jpg" },
+            { title: "Assassin's Creed Valhalla", price: 5.90, img:"https://upload.wikimedia.org/wikipedia/en/f/ff/Assassin%27s_Creed_Valhalla_cover.jpg" }
+        ];
+
+        const container = document.getElementById('games-container');
+        
+        games.forEach(game => {
+            const message = encodeURIComponent(`Salam! Mən bu oyunu almaq istəyirəm: ${game.title}`);
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${message}`;
+            
+            const imageSrc = game.img ? game.img : `https://via.placeholder.com/300x400/111/fff?text=${encodeURIComponent(game.title)}`;
+
+            const card = document.createElement('div');
+            card.className = 'game-card';
+            card.innerHTML = `
+                <img src="${imageSrc}" alt="${game.title}" class="card-image">
+                <div class="game-title">${game.title}</div>
+                <div class="game-price">${game.price.toFixed(2)} AZN</div>
+                <a href="${whatsappLink}" target="_blank" class="btn-buy">AL</a>
+            `;
+            container.appendChild(card);
+        });
+    </script>
+</body>
+</html>
